@@ -1,0 +1,17 @@
+---
+  stages:
+    - stage: Build_stage
+      displayName: SPC_build
+      pool: 
+        vmImage: ubuntu 22.04
+      trigger: none
+      jobs:
+        - job: Build_job
+          steps: 
+            - task: Maven@4
+              mavenPOMFile: pom.xml
+              jdkVersionOption: '1.17'
+              goals: package
+              
+            - script: ./runtests.sh
+              displayName: Running script
